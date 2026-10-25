@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Borus Cars Privacy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@1,700;1,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Layout: one readable legal column under a slim racing-stripe masthead; contents list beside it on wide screens. */
+:root {
+  --bg: #f6f5f3;
+  --surface: #ffffff;
+  --fg: #1b1a20;
+  --muted: #5d5a66;
+  --rule: #e2dfe6;
+  --accent: #e8590c;
+  --accent-ink: #b8460a;
+  --stripe: #ff6b14;
+  --display: "Barlow Semi Condensed", "Arial Narrow", system-ui, sans-serif;
+  --body: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111017; --surface: #1a1922; --fg: #ecebf0; --muted: #a6a3b2; --rule: #2c2a36;
+    --accent: #ff7a2e; --accent-ink: #ff9a5c; --stripe: #ff6b14; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111017; --surface: #1a1922; --fg: #ecebf0; --muted: #a6a3b2; --rule: #2c2a36;
+  --accent: #ff7a2e; --accent-ink: #ff9a5c; --stripe: #ff6b14; color-scheme: dark;
+}
+body {
+  background: var(--bg); color: var(--fg);
+  font: 400 1.0625rem/1.65 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 1040px; margin: 0 auto; padding-block: 40px 72px; }
+header { display: grid; gap: 10px; padding-bottom: 28px; border-bottom: 1px solid var(--rule); }
+.badge { display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; }
+.badge::before { content: ""; width: 44px; height: 8px; background: var(--stripe); transform: skewX(-24deg); border-radius: 1px; }
+h1 { font: italic 800 clamp(2.4rem, 6vw, 3.6rem)/1 var(--display); margin: 0; letter-spacing: -.01em; text-wrap: balance; }
+.meta { color: var(--muted); margin: 0; }
+.layout { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 48px; padding-top: 32px; }
+nav { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 20px); align-self: start; font-size: .92rem; }
+nav p { margin: 0 0 10px; font: italic 700 .95rem var(--display); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+nav ol { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+nav a { color: var(--fg); text-decoration: none; }
+nav a:hover, nav a:focus-visible { color: var(--accent-ink); text-decoration: underline; }
+article { min-width: 0; max-width: 68ch; }
+.summary { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 18px 22px; margin-bottom: 8px; }
+.summary h2 { margin-top: 0; }
+section { padding-top: 22px; }
+h2 { font: italic 700 1.6rem/1.15 var(--display); margin: 0 0 8px; text-wrap: balance; }
+h3 { font-size: 1.02rem; margin: 18px 0 4px; }
+p, ul { margin: 0 0 12px; }
+ul { padding-left: 1.2em; }
+li { margin-bottom: 6px; }
+a { color: var(--accent-ink); }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.table-wrap { overflow-x: auto; margin: 6px 0 14px; }
+table { border-collapse: collapse; width: 100%; font-size: .95rem; }
+th, td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--rule); }
+th { font-weight: 700; color: var(--muted); font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; }
+.contact { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+code.addr { font: 700 1rem var(--body); background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 6px 10px; user-select: all; }
+button { font: 700 .9rem var(--body); color: var(--fg); background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 7px 12px; cursor: pointer; }
+button:hover { border-color: var(--accent); }
+footer { margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--rule); color: var(--muted); font-size: .9rem; }
+@media (max-width: 760px) {
+  .layout { grid-template-columns: 1fr; gap: 20px; }
+  nav { position: static; }
+  nav ol { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <header>
+    <div class="badge">Borus Games</div>
+    <h1>Borus Cars Privacy Policy &amp; Terms</h1>
+    <p class="meta">Effective 20 October 2026 · Applies to the Borus Cars app on Android and iOS</p>
+  </header>
+
+  <div class="layout">
+    <nav aria-label="Contents">
+      <p>Contents</p>
+      <ol>
+        <li><a href="#summary">In short</a></li>
+        <li><a href="#who">Who we are</a></li>
+        <li><a href="#data">What is collected</a></li>
+        <li><a href="#ads">Ads</a></li>
+        <li><a href="#purchases">Purchases</a></li>
+        <li><a href="#choices">Your choices</a></li>
+        <li><a href="#children">Children</a></li>
+        <li><a href="#rights">Your rights</a></li>
+        <li><a href="#terms">Terms of use</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ol>
+    </nav>
+
+    <article>
+      <div class="summary" id="summary">
+        <h2>In short</h2>
+        <ul>
+          <li>Borus Cars has no accounts. Your coins, cars, paint jobs, upgrades and settings are saved only on your phone.</li>
+          <li>The game is free and shows ads. Our ad partners receive your device's advertising ID and basic device information to show and measure ads.</li>
+          <li>You choose on first launch whether ads may be personalised, and you can change it any time in <strong>Settings → Personalised ads</strong>.</li>
+          <li>Purchases are handled by Google Play or the App Store. We never see your card details.</li>
+        </ul>
+      </div>
+
+      <section id="who">
+        <h2>Who we are</h2>
+        <p>Borus Cars is made by Ans, publishing as Borus Games ("we", "us"). We are responsible for this app and this policy.</p>
+      </section>
+
+      <section id="data">
+        <h2>What is collected</h2>
+        <h3>Stored on your device only</h3>
+        <p>Game progress (coins, owned cars, paint, upgrades, boosters, best lap times, daily-reward streak) and your settings (sound, graphics, controls, speed units, ad preference). This never leaves your device and we cannot see it. Uninstalling the app deletes it.</p>
+        <h3>Collected by our partners</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Partner</th><th>Why</th><th>Data</th></tr></thead>
+            <tbody>
+              <tr><td>Unity LevelPlay (ironSource) and the ad networks it works with</td><td>Showing, limiting and measuring ads; preventing ad fraud</td><td>Advertising ID (Google Advertising ID or Apple IDFA where allowed), IP address, device model, operating system, language, app version, ad interactions</td></tr>
+              <tr><td>Google Play / Apple App Store</td><td>Processing in-app purchases</td><td>Purchase records handled under their own policies</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>We do not collect your name, email address, contacts, photos or precise location.</p>
+      </section>
+
+      <section id="ads">
+        <h2>Ads</h2>
+        <p>Borus Cars shows two kinds of ads: optional reward videos you choose to watch (for example to double your race coins), and short full-screen ads between races. There are no ads during a race. Buying <strong>Remove Ads</strong> or the <strong>Starter Pack</strong> turns off the between-race ads; reward videos stay available if you want them.</p>
+        <p>If you allow personalised ads, partners may use your advertising ID to show ads based on your interests. If you don't, you still see ads, but they are not based on your interests. On iOS, the app only uses your IDFA if you allow tracking when asked.</p>
+        <p>Read our partners' policies: <a href="https://unity.com/legal/game-player-and-app-user-privacy-policy" rel="noopener">Unity player privacy policy</a> · <a href="https://developers.is.com/ironsource-mobile/air/ironsource-mobile-privacy-policy/" rel="noopener">ironSource privacy policy</a>.</p>
+      </section>
+
+      <section id="purchases">
+        <h2>Purchases</h2>
+        <p>Remove Ads, the Starter Pack and coin packs are bought through Google Play or the App Store, which handle payment and receipts. Remove Ads and the Starter Pack are one-time purchases and can be restored with <strong>Restore Purchases</strong> in the coin store. Coins are a virtual in-game currency with no cash value; they can't be exchanged for money or transferred.</p>
+      </section>
+
+      <section id="choices">
+        <h2>Your choices</h2>
+        <ul>
+          <li><strong>Personalised ads:</strong> switch on or off in Settings.</li>
+          <li><strong>Advertising ID:</strong> reset or delete it in your phone's settings (Android: Settings → Privacy → Ads; iOS: Settings → Privacy &amp; Security → Tracking).</li>
+          <li><strong>Game data:</strong> use Reset Progress in Settings, or uninstall the app.</li>
+        </ul>
+      </section>
+
+      <section id="children">
+        <h2>Children</h2>
+        <p>Borus Cars is not directed at children under 13 and we do not knowingly collect personal information from them. If you believe a child has used the app and data was collected by our ad partners, contact us and we will help you request deletion.</p>
+      </section>
+
+      <section id="rights">
+        <h2>Your rights</h2>
+        <p>Depending on where you live (for example the UK, EU or California) you may have the right to access, correct or delete personal data, to object to its use for personalised ads, and to complain to your data protection authority. Because we hold no personal data ourselves, most requests are best made to our ad partners using the links above; we are happy to help with that.</p>
+      </section>
+
+      <section id="terms">
+        <h2>Terms of use</h2>
+        <ul>
+          <li>Borus Cars is licensed to you for personal, non-commercial use. Don't copy, modify, resell or reverse-engineer the app.</li>
+          <li>Don't cheat or tamper with the game or its purchases.</li>
+          <li>The app is provided "as is". We work to keep it running well but can't promise it will always be available or free of bugs, and we may update or change features, prices and rewards.</li>
+          <li>Refunds for purchases follow Google Play's or Apple's refund policies.</li>
+          <li>Car models in the game are fictional designs and are not affiliated with any real car manufacturer.</li>
+        </ul>
+      </section>
+
+      <section id="contact">
+        <h2>Contact</h2>
+        <p>Questions about privacy or these terms:</p>
+        <div class="contact">
+          <code class="addr" id="email">m.ansafzal.0@gmail.com</code>
+          <button type="button" id="copy">Copy address</button>
+        </div>
+        <p style="margin-top:14px">We may update this policy when the app changes. The effective date at the top always shows the latest version.</p>
+      </section>
+
+      <footer>© 2026 Borus Games · Borus Cars</footer>
+    </article>
+  </div>
+</div>
+
+<script>
+document.getElementById('copy').addEventListener('click', function () {
+  var btn = this, text = document.getElementById('email').textContent;
+  function done(msg) { btn.textContent = msg; setTimeout(function () { btn.textContent = 'Copy address'; }, 1600); }
+  try {
+    navigator.clipboard.writeText(text).then(function () { done('Copied'); }, function () { select(); });
+  } catch (e) { select(); }
+  function select() {
+    var r = document.createRange(); r.selectNodeContents(document.getElementById('email'));
+    var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); done('Selected');
+  }
+});
+</script>
+
+</body>
+</html>
