@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#ff8a7a">
+  <title>Chomp City - Borus Games</title>
+  <link rel="icon" href="icon.png">
+  <style>
+    html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #2a1a4a; touch-action: none; -webkit-user-select: none; user-select: none; }
+    #frame { position: absolute; overflow: hidden; }
+    #unity-canvas { width: 100%; height: 100%; display: block; background: #ffb65c; outline: none; }
+    #loader { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px;
+              font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color: #3c1e8c; background: linear-gradient(#ffb65c, #ff688c); z-index: 2; }
+    #loader img { width: 120px; height: 120px; border-radius: 28px; box-shadow: 0 8px 24px rgba(60, 30, 140, .35); }
+    #loader .name { font-weight: 800; font-size: 26px; letter-spacing: .5px; }
+    #bar { width: 60%; max-width: 320px; height: 14px; border-radius: 7px; background: rgba(255, 255, 255, .55); overflow: hidden; }
+    #fill { height: 100%; width: 0; background: #7c4dff; transition: width .2s; }
+    #loader .by { font-size: 13px; opacity: .7; }
+  </style>
+</head>
+<body>
+  <div id="frame"><canvas id="unity-canvas" tabindex="-1"></canvas></div>
+  <div id="loader">
+    <img src="icon.png" alt="">
+    <div class="name">Chomp City</div>
+    <div id="bar"><div id="fill"></div></div>
+    <div class="by">by Borus Games</div>
+  </div>
+  <script>
+    var canvas = document.getElementById("unity-canvas");
+    var frame = document.getElementById("frame");
+    var loader = document.getElementById("loader");
+    window.borusHideLoader = function () { loader.style.display = "none"; };
+
+    // The game is designed for portrait phones. Keep the canvas between 9:21 and 9:16 and
+    // letterbox anything wider (desktop, tablets, landscape) so it is playable at every aspect ratio.
+    function fit() {
+      var vw = window.innerWidth, vh = window.innerHeight;
+      var h = vh, w = Math.min(vw, h * 9 / 16);
+      if (h > w * 21 / 9) h = w * 21 / 9;
+      frame.style.width = w + "px";
+      frame.style.height = h + "px";
+      frame.style.left = ((vw - w) / 2) + "px";
+      frame.style.top = ((vh - h) / 2) + "px";
+    }
+    window.addEventListener("resize", fit);
+    fit();
+
+    var config = {
+      arguments: [],
+      dataUrl: "Build/b22c276ad99b8d057f8c475d0a891548.data.unityweb",
+      frameworkUrl: "Build/bf0878afa4f5657bebdb52136b9ca678.framework.js.unityweb",
+      codeUrl: "Build/6c67dddcf637b5c3a360833dbcc4be7a.wasm.unityweb",
+      streamingAssetsUrl: "StreamingAssets",
+      companyName: "Borus Games",
+      productName: "Chomp City",
+      productVersion: "1.0.0",
+      matchWebGLToCanvasSize: true,
+      devicePixelRatio: Math.min(window.devicePixelRatio || 1, 2)
+    };
+
+    function start() {
+    var script = document.createElement("script");
+    script.src = "Build/e33d12cbe1a25fa601a4d500c735b3d8.loader.js";
+    script.onload = function () {
+      createUnityInstance(canvas, config, function (p) {
+        document.getElementById("fill").style.width = (100 * p) + "%";
+      }).then(function (instance) {
+        window.unityInstance = instance;
+        setTimeout(window.borusHideLoader, 400);
+      }).catch(function (message) {
+        loader.querySelector(".by").textContent = "Sorry, this browser couldn't start the game.";
+        console.error(message);
+      });
+    };
+    document.body.appendChild(script);
+    }
+    // Big files are stored in parts (GitHub's upload limit); join them back into one file in memory.
+    var borusParts = {
+      "Build/6c67dddcf637b5c3a360833dbcc4be7a.wasm.unityweb": ["Build/6c67dddcf637b5c3a360833dbcc4be7a.wasm.unityweb.part1", "Build/6c67dddcf637b5c3a360833dbcc4be7a.wasm.unityweb.part2"]
+    };
+    function joinParts(url) {
+      var parts = borusParts[url];
+      if (!parts) return Promise.resolve(url);
+      return Promise.all(parts.map(function (p) {
+        return fetch(p).then(function (r) { if (!r.ok) throw new Error(p + " " + r.status); return r.arrayBuffer(); });
+      })).then(function (bufs) { return URL.createObjectURL(new Blob(bufs)); });
+    }
+    config.cacheControl = function (url) { return url.indexOf("blob:") === 0 ? "no-store" : "must-revalidate"; };
+    var startGame = start;
+    start = function () {
+      Promise.all(["dataUrl", "codeUrl", "frameworkUrl"].map(function (k) {
+        return joinParts(config[k]).then(function (u) { config[k] = u; });
+      })).then(startGame).catch(function (e) {
+        loader.querySelector(".by").textContent = "Sorry, the game couldn't load. Please refresh.";
+        console.error(e);
+      });
+    };
+
+    start();
+  </script>
+</body>
+</html>
